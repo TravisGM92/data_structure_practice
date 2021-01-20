@@ -110,18 +110,18 @@ describe BinarySearchTree do
   describe "#include?" do
     # include? tells us whether a piece of data exists in the tree
     it "is false for an empty tree" do
-      skip
+      # skip
       assert_equal false, @tree.include?(5)
     end
 
     it "is true for the data of the root node" do
-      skip
+      # skip
       @tree.push(4)
       assert_equal true, @tree.include?(4)
     end
 
     it "finds data lower in the tree" do
-      skip
+      # skip
       @tree.push(4)
       @tree.push(6)
       @tree.push(3356)
@@ -135,12 +135,12 @@ describe BinarySearchTree do
 
   describe "#to_array" do
     it "is empty for empty tree" do
-      skip
+      # skip
       assert_equal [], @tree.to_array
     end
 
     it "pulls data from the tree into an array, starting with the left branches of the tree" do
-      skip
+      # skip
       @tree.push(5)
       @tree.push(4)
       @tree.push(6)
@@ -152,12 +152,12 @@ describe BinarySearchTree do
 
   describe "#sort" do
     it "returns empty array for empty tree" do
-      skip
+      # skip
       assert_equal [], @tree.sort
     end
 
     it "returns a sorted array of the tree elements" do
-      skip
+      # skip
       @tree.push(5)
       @tree.push(4)
       @tree.push(6)
@@ -173,12 +173,12 @@ describe BinarySearchTree do
     # note that given the inherent left/right structure of a binary search tree
     # it is possible to find the min or max elements without searching the entire tree
     it "is nil for an empty tree" do
-      skip
+      # skip
       assert_nil @tree.min
     end
 
     it "finds the minimum value in the tree" do
-      skip
+      # skip
       @tree.push(5)
       @tree.push(4)
       @tree.push(6)
@@ -193,12 +193,12 @@ describe BinarySearchTree do
     # note that given the inherent left/right structure of a binary search tree
     # it is possible to find the min or max elements without searching the entire tree
     it "is nil for an empty tree" do
-      skip
+      # skip
       assert_nil @tree.max
     end
 
     it "finds the maximum value in the tree" do
-      skip
+      # skip
       @tree.push(5)
       @tree.push(4)
       @tree.push(6)
