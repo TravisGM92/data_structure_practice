@@ -222,12 +222,12 @@ describe BinarySearchTree do
     # should produce post_ordered output [1,3,2,5,4]
 
     it "should be empty for empty tree" do
-      skip
+      # skip
       assert_equal [], @tree.post_ordered
     end
 
     it "should give back elements in post-order" do
-      skip
+      # skip
       @tree.push(4)
       @tree.push(2)
       @tree.push(5)
@@ -240,18 +240,18 @@ describe BinarySearchTree do
 
   describe "#min_height" do
     it "is 0 for empty tree" do
-      skip
+      # skip
       assert_equal 0, @tree.min_height
     end
 
     it "is 1 for tree with root node only" do
-      skip
+      # skip
       @tree.push(1)
       assert_equal 1, @tree.min_height
     end
 
     it "finds shortest path from root node to a leaf" do
-      skip
+      # skip
       #        4
       #       / \
       #      2   6
@@ -268,18 +268,18 @@ describe BinarySearchTree do
 
   describe "#max_height" do
     it "is 0 for empty tree" do
-      skip
+      # skip
       assert_equal 0, @tree.max_height
     end
 
     it "is 1 for tree with root node only" do
-      skip
+      # skip
       @tree.push(1)
       assert_equal 1, @tree.max_height
     end
 
     it "finds shortest path from root node to a leaf" do
-      skip
+      # skip
       #        4
       #       / \
       #      2   6
