@@ -110,7 +110,7 @@ describe BinarySearchTree do
   describe "#include?" do
     # include? tells us whether a piece of data exists in the tree
     it "is false for an empty tree" do
-      # skip
+      skip
       assert_equal false, @tree.include?(5)
     end
 
