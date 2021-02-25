@@ -1,98 +1,116 @@
-require_relative 'node'
-
 class BinarySearchTree
   attr_reader :root_node, :count
 
-  def initialize
-    @root_node = nil
+  def initialize root_node=nil
+    @root_node = root_node
     @count = 0
-    @all_values = []
   end
 
-  def push(value)
-    @root_node.nil? ? @root_node = Node.new(value) : @root_node.push(value)
-    @count += 1
+  def push(data)
+    if @root_node.nil?
+      @root_node = Node.new(data)
+      @count += 1
+    else
+      insert_node(find_next(@root_node, data), data)
+      @count += 1
+    end
   end
 
-  def include?(value)
-    @root_node.include?(value)
+  def include?(current=@root_node, data)
+    if current.nil?
+      false
+    else
+      find_next(current, data).data == data
+    end
   end
 
   def to_array
-    all_left_values
-    all_right_values
-    @all_values
+    if @root_node.nil?
+      []
+    else
+      all_left_nodes + all_right_nodes
+    end
   end
 
   def sort
-    return @all_values unless @root_node
-    to_array.sort
-  end
-
-  def min
-    return @root_node unless @root_node
-    all_left_values
-    @all_values[-1]
-  end
-
-  def max
-    return @root_node unless @root_node
-    all_right_values
-    @all_values[-1]
-  end
-
-  def min_height(current=@root_node)
-    return @count if @count < 2
-    left_height < right_height ? left_height : right_height + 1
-  end
-
-  def max_height
-    return @count if @count < 2
-    left_height > right_height ? left_height : right_height + 1
-  end
-
-  def post_ordered(current=@root_node)
-    if current.nil? && current == @root_node
-      return []
-    elsif current.nil? && current != @root_node
-      return nil
+    if @root_node.nil?
+      []
     else
-      post_ordered(current.left)
-      post_ordered(current.right)
-      @all_values << current.data
+      to_array.sort
     end
+  end
+
+  def min(current=@root_node)
+    current.nil? ? current : (current.left.nil? ? current.data : min(current.left))
+  end
+
+  def max(current=@root_node)
+    current.nil? ? current : (current.right.nil? ? current.data : max(current.right))
+  end
+
+  def post_ordered(node=@root_node, result=[])
+    return [] if node.nil?
+    in_order(node.left, result)
+    in_order(node.right, result)
+    result << @root_node.data
+  end
+
+  def in_order(node=@root_node, result=[])
+    return [] if node.nil?
+    in_order(node.left, result)
+    in_order(node.right, result)
+    result << node.data
+  end
+
+  def min_height
+    @count
   end
 
   private
 
-  def all_left_values(current=@root_node)
-    if @root_node.nil?
-      @all_values
-    elsif !current.nil?
-      @all_values << current.data
-      all_left_values(current.left)
+  def find_previous(data, current=@root_node)
+    if current.left.data == data
+      current
+    else
+      find_previous(data, current.left)
     end
   end
 
-  def all_right_values(current=@root_node)
-    return @all_values unless @root_node
-    if !current.right.nil?
-      @all_values << current.right.data
-      all_right_values(current.right)
+  def find_next(current, new)
+    if new <= current.data
+      find_next_left(current, new)
+    else
+      find_next_right(current, new)
     end
   end
 
-  def left_height
-    all_left_values
-    count = @all_values.count
-    @all_values = []
-    return count
+  def find_next_left(current, new)
+    current.left.nil? ? current : find_next(current.left, new)
   end
 
-  def right_height
-    all_right_values
-    count = @all_values.count
-    @all_values = []
-    return count
+  def find_next_right(current, new)
+    current.right.nil? ? current : find_next(current.right, new)
+  end
+
+  def insert_node(node, new_node_data)
+    new_node_data <= node.data ? node.left = Node.new(new_node_data) : node.right = Node.new(new_node_data)
+  end
+
+  def all_left_nodes(current=@root_node, array=[])
+    array << current.data
+    if current.left.nil?
+      array
+    else
+      all_left_nodes(current.left, array)
+    end
+  end
+
+  def all_right_nodes(current=@root_node.right, array=[])
+    array << current.data
+    if current.right.nil?
+      array
+    else
+      all_right_nodes(current.right, array)
+    end
   end
 end
